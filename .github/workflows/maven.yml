@@ -24,6 +24,7 @@ jobs:
   snyk-scan-sast:
     needs: test-with-JDK23
     runs-on: ubuntu-latest
+    if: ${{ secrets.SNYK_TOKEN != '' }}
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 23
@@ -47,7 +48,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: master
+          ref: main
       - name: ZAP Scan
         uses: zaproxy/action-full-scan@v0.13.0
         with:
